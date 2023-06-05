@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class StudentConfig {
     @Bean
-    CommandLineRunner commandLineRunner(StudentRepository repository, StudentService service){
+    CommandLineRunner commandLineRunner(StudentRepository repository){
         return args -> {
             Student huy = new Student("Huy", "Huy@zz.zz", LocalDate.of(2002, 12, 20));
             Student linh = new Student("Linh", "linh123@gmail.com", LocalDate.of(2003, 6, 9));
