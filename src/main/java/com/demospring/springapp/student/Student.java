@@ -29,8 +29,6 @@ public class Student {
     private String name;
     private String email;
     private LocalDate dod;
-    @Transient //không thêm cột này vào table
-    private Integer age;
 
     public Student() {
     }
@@ -80,17 +78,10 @@ public class Student {
         this.dod = dod;
     }
 
-    public Integer getAge() {
-        return Period.between(dod, LocalDate.now()).getYears();
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
+   
     @Override
     public String toString() {
-        return "Student [id=" + id + ", name=" + name + ", email=" + email + ", dod=" + dod + ", age=" + age + "]";
+        return "Student [id=" + id + ", name=" + name + ", email=" + email + ", dod=" + dod + "]";
     }
     
 }

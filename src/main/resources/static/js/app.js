@@ -20,3 +20,22 @@ const onSubmit = () => {
         })
     })
 }
+
+
+window.addEventListener("load", async () => {
+    let demo = document.getElementById("demo");
+    let students = await axios.get("/api/v1/student").then(data => {
+        return data.data;
+    })
+
+    console.log(students);
+
+    let template = "";
+
+    students.forEach((item) => {
+        template +=`<div>${item.name}</div>`;
+    })
+    
+    demo.innerHTML = template;
+
+});

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import net.htmlparser.jericho.CharacterReference;
+
 @RestController
 @RequestMapping(path = "api/v1/student")
 public class StudentController {
@@ -29,9 +31,23 @@ public class StudentController {
 		return studentService.getStudents();
 	}
 
+    @GetMapping("/allName")
+    public String getMethodName() {
+        StringBuilder allname = new StringBuilder();
+        studentService.getStudents().forEach(item -> {
+            allname.append(item.getName() + "<br>");
+        });
+        return allname.toString();
+    }
+    
+
     @PostMapping
     public void registerNewStudent(@RequestBody Student student){
-        studentService.addNewStudent(student);
+        Student newStudent = new Student();
+        newStudent.setEmail(student.getEmail());
+        newStudent.setName(CharacterReference.encode(student.getName()));
+        newStudent.setDod(student.getDod());
+        studentService.addNewStudent(newStudent);
     }
 
     @DeleteMapping(path = "{studentId}")
