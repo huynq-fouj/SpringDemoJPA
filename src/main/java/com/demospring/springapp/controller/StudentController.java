@@ -1,8 +1,9 @@
-package com.demospring.springapp.student;
+package com.demospring.springapp.controller;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,10 +14,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.demospring.springapp.dto.RegisterStudent;
+import com.demospring.springapp.entity.Student;
+import com.demospring.springapp.service.StudentService;
+
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Positive;
 import net.htmlparser.jericho.CharacterReference;
 
 @RestController
 @RequestMapping(path = "api/v1/student")
+@Validated
 public class StudentController {
     
     private final StudentService studentService;
@@ -27,22 +36,16 @@ public class StudentController {
     }
 
     @GetMapping
-	public List<Student> getStudents(){
+	public List<Student> getStudents(
+        @Min(value = 10, message = "Page size must greater than 9") 
+        @Max(value = 50, message = "Page size must be less than 51") int pageSize, 
+        @Positive(message = "Page number must be greater than 0") int pageNum){
 		return studentService.getStudents();
 	}
-
-    @GetMapping("/allName")
-    public String getMethodName() {
-        StringBuilder allname = new StringBuilder();
-        studentService.getStudents().forEach(item -> {
-            allname.append(item.getName() + "<br>");
-        });
-        return allname.toString();
-    }
     
 
     @PostMapping
-    public void registerNewStudent(@RequestBody Student student){
+    public void registerNewStudent(@RequestBody RegisterStudent student){
         Student newStudent = new Student();
         newStudent.setEmail(student.getEmail());
         newStudent.setName(CharacterReference.encode(student.getName()));

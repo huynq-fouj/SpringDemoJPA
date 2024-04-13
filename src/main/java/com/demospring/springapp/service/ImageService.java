@@ -1,6 +1,5 @@
-package com.demospring.springapp.image;
+package com.demospring.springapp.service;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
@@ -13,7 +12,7 @@ import com.cloudinary.utils.ObjectUtils;
 @Service
 public class ImageService {
     
-    public Map uploadToCluodinary(MultipartFile file) {
+    public Map uploadToCloudinary(MultipartFile file) {
         Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
             "cloud_name", "dxj5ohl9j",
             "api_key", "789545947643535",

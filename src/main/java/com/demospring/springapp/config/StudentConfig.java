@@ -1,4 +1,4 @@
-package com.demospring.springapp.student;
+package com.demospring.springapp.config;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import com.demospring.springapp.repository.StudentRepository;
 
 @Configuration
 public class StudentConfig {

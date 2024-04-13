@@ -1,4 +1,4 @@
-package com.demospring.springapp.student;
+package com.demospring.springapp.service;
 
 import java.util.List;
 import java.util.Objects;
@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import net.htmlparser.jericho.CharacterReference;
-
+import com.demospring.springapp.entity.Student;
+import com.demospring.springapp.repository.StudentRepository;
 
 @Service
 public class StudentService {
